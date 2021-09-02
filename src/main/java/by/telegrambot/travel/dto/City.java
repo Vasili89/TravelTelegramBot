@@ -1,7 +1,6 @@
 package by.telegrambot.travel.dto;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "city", schema = "travelbot")
@@ -12,11 +11,9 @@ public class City {
     private Long id;
 
     @Column(name = "name")
-    @NotEmpty
     private String name;
 
     @Column(name = "message")
-    @NotEmpty
     private String message;
 
     public Long getId() {
@@ -43,5 +40,12 @@ public class City {
         this.message = message;
     }
 
-
+    @Override
+    public String toString() {
+        return "City{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }
