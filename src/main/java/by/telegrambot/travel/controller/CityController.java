@@ -29,7 +29,8 @@ public class CityController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getCity(@PathVariable Long id) {
         City city = cityService.getCityById(id);
-        if (city == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (city == null) return new ResponseEntity<>(
+                "City with id=" + id + " not exists!", HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(city, HttpStatus.OK);
     }
 
@@ -51,7 +52,8 @@ public class CityController {
     @PutMapping("/{id}")
     public ResponseEntity<?> editCity(@PathVariable Long id, @RequestBody City editedCity) {
         if (cityService.getCityById(id) == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(
+                    "City with id=" + id + " not exists!", HttpStatus.NOT_FOUND);
         }
         City cityForEdit = cityService.getCityById(id);
         if (editedCity.getName() != null && !editedCity.getName().isBlank()) {
@@ -67,9 +69,10 @@ public class CityController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCity(@PathVariable Long id) {
         City city = cityService.getCityById(id);
-        if (city == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (city == null) return new ResponseEntity<>(
+                "City with id=" + id + " not exists!", HttpStatus.NOT_FOUND);
         cityService.deleteCity(city);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("City deleted!", HttpStatus.OK);
     }
 
 }
